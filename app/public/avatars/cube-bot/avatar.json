@@ -1,0 +1,9 @@
+{
+  "id": "cube-bot",
+  "name": "Cube Bot",
+  "version": "1.0.0",
+  "author": "Comunidad Berto",
+  "description": "Avatar cúbico minimalista en formato 3D .glb estándar con visor oscuro y ojos aqua",
+  "type": "glb",
+  "entry": "model.glb"
+}

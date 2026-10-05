@@ -1,0 +1,39 @@
+/* ==========================================================================
+   BERTO DESIGN SYSTEM TOKENS (theme.css)
+   Centraliza todos los colores, dimensiones, radios y sombras de Berto.
+   Cualquier ajuste visual de la aplicación se realiza en este único archivo.
+   ========================================================================== */
+
+:root {
+  /* --- Colores Pastel Característicos --- */
+  --berto-aqua: #9AE6E0;          /* Color principal de Berto (acento aqua pastel) */
+  --berto-lavender: #C3B8F5;      /* Lavanda suave (acentos secundarios) */
+  --berto-mint: #A8E6C3;          /* Menta pastel (estado activo / conectado) */
+  --berto-rose: #F5B8C3;          /* Rosa pastel (errores / desconexión) */
+
+  /* --- Superficies de Cristal (Gris-azulado muy oscuro al ~92%) --- */
+  --surface-bg: rgba(21, 25, 36, 0.92);
+  --surface-bg-hover: rgba(26, 31, 44, 0.96);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --surface-border-active: rgba(154, 230, 224, 0.40);
+  --surface-blur: 24px;
+
+  /* --- Textos y Tipografía Limpia (Mayor Contraste) --- */
+  --text-main: #FFFFFF;           /* Blanco principal para máxima nitidez */
+  --text-placeholder: rgba(240, 244, 255, 0.75); /* Placeholder nítido con fondos claros y oscuros */
+  --text-muted: #CBD2E1;          /* Textos secundarios nítidos */
+  --text-dim: #7A859E;            /* Acentos muy sutiles */
+  --font-clean: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", sans-serif;
+
+  /* --- Dimensiones de la Cápsula (Píldora Fina de 44px) --- */
+  --capsule-width-compact: 340px;
+  --capsule-width-expanded: 440px;
+  --capsule-height-compact: 44px; /* Una sola línea en reposo */
+  --capsule-radius-compact: 22px; /* Mitad exacta de 44px (píldora completa) */
+  --capsule-radius-expanded: 22px;
+  --capsule-top-margin: 12px;
+
+  /* --- Sombras y Efectos Atmosféricos --- */
+  --capsule-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.15);
+  --capsule-glow: 0 0 28px rgba(154, 230, 224, 0.18);
+}

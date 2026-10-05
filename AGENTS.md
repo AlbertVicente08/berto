@@ -5,7 +5,7 @@
 
 ## 1. Qué es Berto
 
-Agente de IA de código abierto con **avatar** que aparece como **popup en Windows** con un atajo de teclado (por defecto `Ctrl+Espacio`). Se adapta a la app activa (VS Code, navegador, Spotify, Discord, Claude...). Cada usuario elige su modelo de IA (local o nube). Licencia MIT, sin suscripciones, donaciones voluntarias.
+Agente de IA de código abierto con **avatar** que aparece como **popup en Windows** con un atajo de teclado (por defecto `Ctrl+Alt+B`). Se adapta a la app activa (VS Code, navegador, Spotify, Discord, Claude...). Cada usuario elige su modelo de IA (local o nube). Licencia MIT, sin suscripciones, donaciones voluntarias.
 
 Es un proyecto **para aprender** (el autor hace "vibe coding").
 
@@ -29,8 +29,8 @@ Es un proyecto **para aprender** (el autor hace "vibe coding").
 | Fase | Nombre | Estado |
 |---|---|---|
 | 0 | Cimientos | Hecha |
-| 1 | El popup y el avatar | En curso |
-| 2 | Cerebro con cualquier modelo | Pendiente |
+| 1 | El popup y el avatar | Hecha |
+| 2 | Cerebro con cualquier modelo | En curso |
 | 3 | Conciencia del contexto | Pendiente |
 | 4 | Herramientas y acciones con permisos | Pendiente |
 | 5 | Plugins por aplicación | Pendiente |
@@ -44,7 +44,7 @@ Estados posibles: `Pendiente` · `En curso` · `Hecha`.
 | Parte | Tecnología |
 |---|---|
 | Popup/ventana | Tauri 2 (Rust) |
-| Interfaz y avatar | React + TypeScript + Vite; avatar con Rive o Lottie |
+| Interfaz y avatar | React + TypeScript + Vite; avatar 3D con Three.js + React Three Fiber |
 | Cerebro | Python 3.12+ |
 | Modelos | LiteLLM (OpenAI, Claude, Gemini, Ollama...) |
 | Navegador | Playwright |
@@ -56,7 +56,7 @@ berto/
 ├─ app/       Tauri + React (popup, avatar, chat)
 ├─ agent/     Python: cerebro (paquete en agent/berto/)
 ├─ plugins/   Un plugin por aplicación
-├─ docs/      arquitectura.md, roadmap.md
+├─ docs/      arquitectura.md, roadmap.md, avatar.md, popup.md
 ├─ data/      Datos locales (no se suben)
 └─ AGENTS.md  Este archivo
 ```
@@ -93,23 +93,35 @@ Arquitectura: [docs/arquitectura.md](docs/arquitectura.md). La interfaz (`app/`)
 
 ### Fase 1: El popup y el avatar
 
-**Objetivo:** pulsar un atajo y que aparezca Berto.
+**Objetivo:** pulsar un atajo y que aparezca la isla flotante con el avatar 3D de Berto asomado.
 
 **Tareas**
-- [ ] Ventana flotante, sin bordes, transparente y siempre encima.
-- [ ] Atajo global (por defecto `Ctrl+Espacio`) que muestra/oculta la ventana, incluso con otra app enfocada.
-- [ ] Icono en la bandeja del sistema (menú: Mostrar, Ajustes, Salir).
-- [ ] Opción de arrancar con Windows.
-- [ ] Avatar animado (Rive o Lottie) con estados: reposo, escuchando, pensando, hablando.
-- [ ] Caja de texto para escribir (aún sin IA).
+- [x] Ventana de isla flotante estilo "Dynamic Island": centrada en el borde superior del monitor activo, sin bordes (`decorations: false`), fondo transparente, siempre encima (`alwaysOnTop`), sin icono en la barra de tareas (`skipTaskbar`). Cápsula oscura semitransparente con degradado, borde y sombra (sin Acrylic/Mica nativo de window-vibrancy para no revelar el rectángulo de la ventana).
+- [x] Soporte para hacer que las zonas transparentes no bloqueen los clics hacia las apps de debajo (clic a través), implementado en Rust con sondeo periódico de la posición global del cursor (`GetCursorPos`) vs rectángulo de la cápsula visible (`set_ignore_cursor_events`).
+- [x] Atajo global (por defecto `Ctrl+Alt+B`, configurable con `BERTO_HOTKEY`) que muestra/oculta la isla, incluso con otra app enfocada.
+- [x] Ocultación rápida con tecla `Esc` y al perder el foco (`blur`).
+- [x] Icono en la bandeja del sistema (menú: Mostrar, Ajustes, Salir) y opción de arrancar con Windows.
+- [x] Definición del token de diseño de color único (cian eléctrico `#00E5FF`) aplicado a ojos, brillo y acentos.
+- [x] Avatar 3D minimalista por defecto en Three.js (@react-three/fiber + @react-three/drei): robot asomado por encima de la cápsula, ojos LED que siguen el cursor del ratón (alimentados por la posición global leída por Rust) o miran a un punto arbitrario, y animaciones para los 4 estados: reposo, escuchando, pensando, hablando.
+- [x] Sistema de avatares intercambiables: modelos `.glb` cargables en tiempo de ejecución desde `%APPDATA%\Berto\avatars\` o `app/avatars/` sin recompilar; avatares de tipo `code` en R3F integrados. Segundo avatar de prueba en formato `.glb`.
+- [x] Selector de avatar en Ajustes que conserva la elección del usuario.
+- [x] Cápsula con animación fluida de tipo "morph" y física de muelle (Framer Motion) que se expande hacia abajo al interactuar/escribir.
+- [x] Caja de texto para escribir (aún sin IA) y botones de depuración para alternar los 4 estados del avatar.
+- [x] Optimización de rendimiento: pausar el bucle de render 3D cuando la isla está oculta (0% GPU).
 
 **Hecho cuando**
-- Con otra aplicación en primer plano, `Ctrl+Espacio` muestra el popup; pulsarlo de nuevo (o `Esc`) lo oculta.
-- El avatar se ve con fondo transparente y cambia entre sus 4 estados (se puede probar con botones de depuración).
+- Con otra aplicación en primer plano, `Ctrl+Alt+B` hace aparecer la isla desde arriba centrada; pulsarlo de nuevo, pulsar `Esc` o perder el foco la oculta.
+- No hay barra de título, no aparece en la barra de tareas y la cápsula se funde con el escritorio (captura de pantalla del monitor real).
+- Los clics en las zonas transparentes de la ventana llegan a las apps de debajo (controlado por Rust).
+- La cápsula se expande y contrae con animación fluida tipo muelle al escribir/interactuar.
+- Berto en 3D se asoma sobre la cápsula y sus ojos siguen el cursor del ratón en toda la pantalla.
+- Se aprecian los 4 estados del robot; cambiar el color del token de diseño actualiza el color en toda la aplicación.
+- Se puede cambiar al avatar `.glb` de prueba desde Ajustes sin reiniciar ni tocar código, y la elección persiste.
 - El icono de bandeja aparece y "Salir" cierra la app de verdad.
-- Tras reiniciar sesión de Windows, Berto arranca (si la opción está activada).
+- Con la isla oculta, el consumo de CPU/GPU desciende (medición comprobada).
+- `docs/avatar.md` y `docs/popup.md` documentan fielmente el sistema.
 
-**Qué debe aprender el autor:** ventanas sin bordes y transparentes, atajos globales, máquinas de estados para animación.
+**Qué debe aprender el autor:** Dynamic Island en escritorio, ventanas transparentes y clics a través en Tauri 2, gráficos 3D en React (Three.js / React Three Fiber), formato .glb, animaciones basadas en física de muelle (Framer Motion).
 
 ---
 
@@ -146,10 +158,13 @@ Arquitectura: [docs/arquitectura.md](docs/arquitectura.md). La interfaz (`app/`)
 - [ ] Sistema de **perfiles por aplicación** (archivo de configuración por app: instrucciones y herramientas propias).
 - [ ] Mostrar en el popup qué app detecta Berto.
 - [ ] Ajustes para desactivar la lectura de contexto por app (privacidad).
+- [ ] **Vinculación visual con halo**: ventana complementaria transparente en cian eléctrico (`#00E5FF`) que rodea la app vinculada y sigue su posición/tamaño como indicador de seguridad de acceso.
+- [ ] Berto orienta su mirada (`lookAt`) hacia la ventana de la aplicación supervisada.
 
 **Hecho cuando**
 - Estando en VS Code, Chrome y otra app, Berto muestra correctamente cuál es cada una.
 - La respuesta cambia según el perfil de la app activa (se puede comprobar con un perfil de prueba).
+- Con la app vinculada, el halo cian eléctrico rodea su ventana y pulsa cuando Berto actúa; Berto la mira directamente.
 - Con la lectura de contexto desactivada, Berto **no** lee nada de esa app.
 - Ningún dato de contexto se guarda ni se sube sin que el usuario lo sepa.
 
@@ -219,6 +234,7 @@ Arquitectura: [docs/arquitectura.md](docs/arquitectura.md). La interfaz (`app/`)
 **Tareas**
 - [ ] Documentación completa (instalación, uso, plugins) y `CONTRIBUTING.md`.
 - [ ] Plantillas de issues y pull requests.
+- [ ] Empaquetar el servicio Python con la aplicación (sidecar / PyInstaller o embebido en el instalador de Tauri).
 - [ ] Instalador `.exe` (Tauri bundle) y primera *release* en GitHub.
 - [ ] Donaciones voluntarias (GitHub Sponsors / Ko-fi) enlazadas en el README.
 - [ ] Revisión de seguridad: ningún secreto en el historial, permisos revisados.

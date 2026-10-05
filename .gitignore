@@ -1,5 +1,7 @@
 # Secretos: NUNCA se suben
 .env
+.env*
+**/.env
 
 # Python
 .venv/

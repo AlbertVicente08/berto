@@ -33,10 +33,46 @@ app.add_middleware(
 )
 
 
+import secrets
+from fastapi import Header, HTTPException, status
+
+# Token secreto generado aleatoriamente en cada arranque, compartido solo localmente con Berto
+SHUTDOWN_TOKEN = secrets.token_urlsafe(32)
+TOKEN_DIR = root_dir / "data"
+TOKEN_DIR.mkdir(parents=True, exist_ok=True)
+TOKEN_FILE = TOKEN_DIR / "shutdown_token.txt"
+TOKEN_FILE.write_text(SHUTDOWN_TOKEN, encoding="utf-8")
+
+
 @app.get("/health")
 def health_check():
     """Endpoint de comprobación de salud para verificar que el servicio está vivo."""
     return {"status": "ok"}
+
+
+@app.post("/shutdown")
+def shutdown(x_shutdown_token: str | None = Header(default=None, alias="X-Shutdown-Token")):
+    """Permite el cierre ordenado del servidor Python desde la app de forma protegida."""
+    if not x_shutdown_token or x_shutdown_token != SHUTDOWN_TOKEN:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Forbidden: token de apagado no valido o ausente",
+        )
+
+    import threading
+    import time
+
+    def stop():
+        time.sleep(0.3)
+        try:
+            if TOKEN_FILE.exists():
+                TOKEN_FILE.unlink()
+        except Exception:
+            pass
+        os._exit(0)
+
+    threading.Thread(target=stop).start()
+    return {"status": "shutting_down"}
 
 
 def main():

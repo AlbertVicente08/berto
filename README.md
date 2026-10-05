@@ -4,7 +4,7 @@
 
 Berto es un asistente de código abierto que vive en tu Windows como un popup: pulsas una combinación de teclas, aparece su avatar y te ayuda en lo que estés haciendo, ya sea en VS Code, el navegador, Spotify, Discord o donde sea. Se adapta a cada aplicación, y **tú eliges el modelo de IA** (local o en la nube).
 
-> Estado: **Fase 0, cimientos**. Berto todavía no funciona; este repositorio es el punto de partida.
+> Estado: **Fase 1, el popup y el avatar**. Cimientos completados; en desarrollo la isla flotante con avatar 3D.
 
 ## Por qué existe
 
@@ -12,7 +12,7 @@ Es un proyecto para **aprender** construyendo algo grande: interfaces de escrito
 
 ## Ideas principales
 
-- **Popup con avatar**: aparece y desaparece con un atajo de teclado (por defecto `Ctrl+Espacio`).
+- **Popup con avatar**: aparece y desaparece con un atajo de teclado (por defecto `Ctrl+Alt+B`).
 - **Cualquier modelo de IA**: OpenAI, Claude, Gemini, o modelos locales con Ollama, a través de [LiteLLM](https://github.com/BerriAI/litellm).
 - **Consciente del contexto**: sabe qué aplicación tienes abierta y cambia su forma de ayudar.
 - **Plugins por aplicación**: cada app (VS Code, navegador, Spotify...) es un plugin independiente que cualquiera puede crear, basado en [MCP](https://modelcontextprotocol.io).
@@ -23,7 +23,7 @@ Es un proyecto para **aprender** construyendo algo grande: interfaces de escrito
 | Parte | Tecnología |
 |---|---|
 | Popup y ventana | Tauri 2 (Rust) |
-| Interfaz y avatar | React + TypeScript + Vite, animaciones con Rive/Lottie |
+| Interfaz y avatar | React + TypeScript + Vite, avatar 3D con Three.js + React Three Fiber |
 | Cerebro del agente | Python |
 | Modelos de IA | LiteLLM |
 | Control del navegador | Playwright |

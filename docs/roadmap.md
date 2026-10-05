@@ -11,12 +11,16 @@ Marca cada casilla cuando se complete. Cada fase deja algo que **funciona y se p
 - [x] Servicio Python comunicado con la interfaz
 - **Resultado:** la app arranca y la interfaz habla con Python.
 
-## Fase 1: El popup
-- [ ] Ventana flotante, transparente y siempre encima
-- [ ] Atajo global para mostrar y ocultar
-- [ ] Icono en la bandeja del sistema y arranque con Windows
-- [ ] Avatar animado (Rive o Lottie) con estados: reposo, escuchando, pensando, hablando
-- **Resultado:** pulsas el atajo y aparece Berto.
+## Fase 1: El popup y el avatar
+- [x] Isla flotante "Dynamic Island" superior, transparente, sin bordes y con clics a través
+- [x] Expansión fluida tipo "morph" con física de muelle (Framer Motion)
+- [x] Atajo global (Ctrl+Alt+B), tecla Esc y ocultación por desenfoque
+- [x] Icono en la bandeja del sistema y arranque con Windows
+- [x] Token de diseño de color único (cian eléctrico `#00E5FF`)
+- [x] Avatar 3D en Three.js/R3F asomado sobre la cápsula, ojos LED que siguen el cursor/objetivo y 4 estados
+- [x] Sistema de avatares intercambiables (`.glb`) con selector en Ajustes
+- [x] Pausa del render 3D al ocultarse (rendimiento eficiente)
+- **Resultado:** pulsas el atajo y la isla se desliza con Berto 3D asomado y reactivo.
 
 ## Fase 2: Cerebro con cualquier modelo
 - [ ] Chat con respuesta en streaming
@@ -29,7 +33,8 @@ Marca cada casilla cuando se complete. Cada fase deja algo que **funciona y se p
 - [ ] Detectar la aplicación activa
 - [ ] Leer contexto de forma controlada: título, texto seleccionado, captura opcional
 - [ ] Perfiles por aplicación
-- **Resultado:** Berto sabe dónde estás y se adapta.
+- [ ] Vinculación visual con halo cian y mirada dirigida del avatar
+- **Resultado:** Berto sabe dónde estás, se adapta y vigila la app vinculada.
 
 ## Fase 4: Herramientas y acciones
 - [ ] Sistema de herramientas con MCP
@@ -49,5 +54,7 @@ Marca cada casilla cuando se complete. Cada fase deja algo que **funciona y se p
 
 ## Fase 7: Apertura y comunidad
 - [ ] Documentación y guía de contribución
+- [ ] Empaquetar el servicio Python con la aplicación (sidecar / PyInstaller o embebido en el instalador de Tauri)
 - [ ] Instalador `.exe`
 - [ ] Donaciones (GitHub Sponsors / Ko-fi) y primera versión pública
+
