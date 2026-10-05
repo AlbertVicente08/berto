@@ -1,0 +1,22 @@
+# Secretos: NUNCA se suben
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node / Tauri
+node_modules/
+app/dist/
+app/src-tauri/target/
+
+# Datos reales del usuario (memoria, historial)
+data/*
+!data/.gitkeep
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
