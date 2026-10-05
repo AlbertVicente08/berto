@@ -14,7 +14,7 @@ Es un proyecto **para aprender** (el autor hace "vibe coding").
 1. **Explica en español sencillo** qué hace cada paso, comando o archivo, antes o mientras lo haces. El autor quiere aprender.
 2. **Trabaja una fase cada vez**, en orden. No empieces la siguiente sin haber cerrado la anterior.
 3. **Una fase solo está "hecha"** cuando se cumplen **todas** sus comprobaciones (sección "Hecho cuando"). Si una falla, la fase NO está hecha. Dilo claramente y no la marques.
-4. **Al cerrar una fase**: marca sus casillas en [docs/roadmap.md](docs/roadmap.md), actualiza el apartado "Estado actual" de este archivo, haz commit (`Fase N: <resumen>`) y explica al autor qué se hizo y qué aprendió.
+4. **Al cerrar una fase**: marca sus casillas en [docs/roadmap.md](docs/roadmap.md), actualiza el apartado "Estado actual" de este archivo, haz commit en inglés (`Phase N: <summary>`) y explica al autor qué se hizo y qué aprendió.
 5. **Seguridad:** nunca escribas claves reales en el código, en `.env.example` ni en commits. `.env` está en `.gitignore`: no lo subas.
 6. **Confirmación obligatoria en acciones peligrosas** (pagar, borrar, enviar mensajes, ejecutar comandos): es un requisito de diseño de Berto.
 7. **Pregunta antes de** instalar programas globales, subir a GitHub (`git push`) o borrar cosas.
@@ -236,5 +236,5 @@ Arquitectura: [docs/arquitectura.md](docs/arquitectura.md). La interfaz (`app/`)
 2. Si alguna falla: arréglala o informa al autor. **No marques la fase como hecha.**
 3. Marca las casillas en [docs/roadmap.md](docs/roadmap.md) y en esta guía.
 4. Cambia el estado de la fase a `Hecha` en la tabla de "Estado actual" y pon la siguiente en `En curso`.
-5. `git add` + `git commit -m "Fase N: <resumen>"`.
+5. `git add` + `git commit -m "Phase N: <summary>"` (en inglés).
 6. Dile al autor, en español sencillo: qué se hizo, cómo se comprobó y qué se aprendió. **Pregunta antes de hacer `git push`.**
