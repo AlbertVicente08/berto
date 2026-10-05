@@ -28,8 +28,8 @@ Es un proyecto **para aprender** (el autor hace "vibe coding").
 
 | Fase | Nombre | Estado |
 |---|---|---|
-| 0 | Cimientos | En curso (estructura y docs listos; falta instalar herramientas y "hola mundo") |
-| 1 | El popup y el avatar | Pendiente |
+| 0 | Cimientos | Hecha |
+| 1 | El popup y el avatar | En curso |
 | 2 | Cerebro con cualquier modelo | Pendiente |
 | 3 | Conciencia del contexto | Pendiente |
 | 4 | Herramientas y acciones con permisos | Pendiente |
@@ -73,11 +73,11 @@ Arquitectura: [docs/arquitectura.md](docs/arquitectura.md). La interfaz (`app/`)
 
 **Tareas**
 - [x] Estructura de carpetas, README, LICENSE (MIT), `.gitignore`, `.env.example`, docs.
-- [ ] Instalar **Python 3.12+** (el `python` actual de Windows es solo un acceso directo a la Microsoft Store), **Rust** (`rustup`) y los requisitos de Tauri en Windows (WebView2 y Visual Studio C++ Build Tools).
-- [ ] Crear el entorno virtual: `python -m venv agent\.venv` y un `agent/requirements.txt` (o `pyproject.toml`).
-- [ ] Crear la app Tauri 2 + React + TypeScript dentro de `app/`.
-- [ ] Crear un servicio Python mínimo en `agent/berto/` (por ejemplo FastAPI) con un endpoint `/health` que responda `{"status": "ok"}`.
-- [ ] Hacer que la interfaz llame a `/health` y muestre el resultado.
+- [x] Instalar **Python 3.12+** (el `python` actual de Windows es solo un acceso directo a la Microsoft Store), **Rust** (`rustup`) y los requisitos de Tauri en Windows (WebView2 y Visual Studio C++ Build Tools).
+- [x] Crear el entorno virtual: `python -m venv agent\.venv` y un `agent/requirements.txt` (o `pyproject.toml`).
+- [x] Crear la app Tauri 2 + React + TypeScript dentro de `app/`.
+- [x] Crear un servicio Python mínimo en `agent/berto/` (por ejemplo FastAPI) con un endpoint `/health` que responda `{"status": "ok"}`.
+- [x] Hacer que la interfaz llame a `/health` y muestre el resultado.
 
 **Hecho cuando** (comprobaciones)
 - `python --version` muestra 3.12 o superior.

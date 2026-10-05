@@ -6,9 +6,9 @@ Marca cada casilla cuando se complete. Cada fase deja algo que **funciona y se p
 
 ## Fase 0: Cimientos
 - [x] Estructura del repo, README, licencia MIT, `.gitignore`, `.env.example`
-- [ ] Instalar Python 3.12+, Rust y herramientas de Tauri
-- [ ] Proyecto Tauri + React funcionando ("hola mundo")
-- [ ] Servicio Python comunicado con la interfaz
+- [x] Instalar Python 3.12+, Rust y herramientas de Tauri
+- [x] Proyecto Tauri + React funcionando ("hola mundo")
+- [x] Servicio Python comunicado con la interfaz
 - **Resultado:** la app arranca y la interfaz habla con Python.
 
 ## Fase 1: El popup
