@@ -1,5 +1,7 @@
 # Roadmap de Berto
 
+> Detalle de cada fase, reglas y comprobaciones para darla por hecha: [../AGENTS.md](../AGENTS.md).
+
 Marca cada casilla cuando se complete. Cada fase deja algo que **funciona y se puede probar**.
 
 ## Fase 0: Cimientos

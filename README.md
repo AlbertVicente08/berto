@@ -55,7 +55,7 @@ Todavía no hay nada que ejecutar. Prepara tu equipo (Fase 0):
 
 ## Hoja de ruta
 
-Resumen (detalle en [docs/roadmap.md](docs/roadmap.md)):
+Resumen (detalle de cada fase y sus comprobaciones en [AGENTS.md](AGENTS.md); casillas de progreso en [docs/roadmap.md](docs/roadmap.md)):
 
 0. Cimientos
 1. El popup y el avatar
